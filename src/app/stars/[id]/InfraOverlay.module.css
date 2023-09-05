@@ -1,0 +1,35 @@
+.controls {
+  position: absolute;
+  left: calc(100vw - 36px);
+  top: 44px;
+  z-index: 1;
+}
+
+.controls .control {
+  margin-bottom: 4px;
+  position: relative;
+  cursor: pointer;
+}
+
+.income {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  width: 160px;
+}
+
+.income .heading {
+  margin-bottom: 12px;
+  font-size: 14px;;
+  text-align: left;
+}
+
+.income .incomeRow {
+}
+
+.income .incomeRow .incomeRowHeader {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
