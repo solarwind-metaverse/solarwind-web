@@ -1,6 +1,7 @@
 #!/bin/bash
+cd deployment
 DEPLOYMENT_FILE="kubernetes/deployment.yml"
-PACKAGE_NAME=$(jq -r '.name' < package.json)
+PACKAGE_NAME=$(jq -r '.name' < ../package.json)
 echo "Package name is $PACKAGE_NAME"
 CURRENT_VERSION=$(awk -F 'image: vhalme/|:x86' '/image: vhalme/{sub(/^_/, "", $3); print $3}' "$DEPLOYMENT_FILE")
 echo "Current version is $CURRENT_VERSION"
@@ -14,7 +15,7 @@ NEW_IMAGE_NAME="vhalme/$PACKAGE_NAME:x86_$NEW_VERSION"
 echo "New image name is $NEW_IMAGE_NAME"
 docker images -q vhalme/$PACKAGE_NAME | xargs docker rmi
 echo "Building $NEW_IMAGE_NAME"
-docker buildx build --platform=linux/amd64 -t $NEW_IMAGE_NAME .
+docker buildx build --platform=linux/amd64 -t $NEW_IMAGE_NAME . --no-cache
 docker push $NEW_IMAGE_NAME
 if [ $? -eq 0 ]; then
   kubectl delete deployment $PACKAGE_NAME
@@ -22,3 +23,4 @@ if [ $? -eq 0 ]; then
   echo "Updated image version from x86_$CURRENT_VERSION to x86_$NEW_VERSION in $DEPLOYMENT_FILE."
   kubectl apply -f "$DEPLOYMENT_FILE"
 fi
+cd ..

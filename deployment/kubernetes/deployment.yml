@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: solarwind-web
-        image: vhalme/solarwind-web:x86_0.0.50
+        image: vhalme/solarwind-web:x86_0.0.51
         ports:
         - containerPort: 3003
         env:
