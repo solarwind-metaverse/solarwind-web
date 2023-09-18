@@ -156,7 +156,7 @@ function ShipDetails({ ship, star }: { ship: Ship, star: Star | null }) {
               console.log('Collect harvest')
               await collectHarvest(ship.id)
             }}>
-                COLLECT { calculateHarvestAmount(lastHarvested, star?.luminosity || 0, star?.shipCount) } SLW
+                COLLECT { calculateHarvestAmount(ship, star?.luminosity || 0, star?.shipCount) } SLW
             </Button>
           ) : (
             <Button variant="contained"

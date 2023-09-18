@@ -58,15 +58,16 @@ export const getTimeTo = (date: Date): TimeComponents =>  {
 
 }
 
-export const calculateHarvestAmount = (lastHarvest: Date | number, luminosity: number, numShips?: number): number =>  {
+export const calculateHarvestAmount = (ship: Ship, luminosity: number, numShips?: number): number =>  {
 
   const now = new Date()
-  const secondsPassed = (now.getTime() - new Date(lastHarvest).getTime()) / 1000
+  const secondsPassed = (now.getTime() - new Date(ship.lastHarvested).getTime()) / 1000
 
   const luminosityLog2 = Math.log2(luminosity)
   const numShipsLog2 = Math.log2(1 + (numShips || 1))
   let multiplier = luminosityLog2 < 0 ? 1 / (1 + Math.abs(luminosityLog2)) : 1 + luminosityLog2
   multiplier = multiplier / numShipsLog2
+  multiplier = ship.health === 0 ? 0 : multiplier * (ship.health / 100)
 
   return Math.round(secondsPassed * multiplier)
 

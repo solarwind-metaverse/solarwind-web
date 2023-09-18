@@ -74,7 +74,7 @@ const InteractWithShipMenu = ({
                         <SyncIcon />
                       </div>
                     ) : (
-                      <Tooltip title={`Collect ${calculateHarvestAmount(ship.lastHarvested, star.luminosity, star.shipCount)} SLW`}>
+                      <Tooltip title={`Collect ${calculateHarvestAmount(ship, star.luminosity, star.shipCount)} SLW`}>
                         <div style={{ rotate: '180deg', display: 'flex' }}>
                           <CollectHarvestIcon />
                         </div>
