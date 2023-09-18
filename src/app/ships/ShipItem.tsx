@@ -100,6 +100,8 @@ function ShipItem({ ship }: { ship: Ship }) {
 
   const status = getShipStatus(ship)
 
+  const shipHealth = (ship.health !== null && ship.health !== undefined) ? ship.health : 100
+
   return (
     <div onClick={() => {
       getOwnShips()
@@ -115,8 +117,8 @@ function ShipItem({ ship }: { ship: Ship }) {
               { ship.name }
             </div>
             <div className={styles.shipHealth}>
-              <div className={styles.healthValue} style={{ color: getHealthColor(ship.health || 100) }}>
-                { Math.round(ship.health || 100) }  
+              <div className={styles.healthValue} style={{ color: getHealthColor(shipHealth) }}>
+                { Math.round(shipHealth) }  
               </div>
             </div>
           </div>
